@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Undangan Pernikahan — Sri & Daiwana</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Overlay / Splash: Tombol Buka Undangan -->
+  <div id="overlay" class="overlay">
+    <!-- decorative ornaments (SVG) in each corner -->
+    <div class="ornament ornament-tl" aria-hidden="true">
+      <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M10 140 C40 100 90 90 140 50" stroke="#c59d5f" stroke-width="4" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="ornament ornament-tr" aria-hidden="true">
+      <svg width="160" height="160" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M170 30 C130 70 100 90 60 130" stroke="#c59d5f" stroke-width="4" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="ornament ornament-bl" aria-hidden="true">
+      <svg width="160" height="160" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M20 40 C60 80 100 110 140 140" stroke="#c59d5f" stroke-width="4" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="ornament ornament-br" aria-hidden="true">
+      <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M160 150 C120 110 90 90 50 60" stroke="#c59d5f" stroke-width="4" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="overlay-content" role="dialog" aria-modal="true" aria-label="Undangan pernikahan">
+      <h2 class="overlay-title">The Wedding Of</h2>
+      <h1 class="overlay-names">Sri &amp; Daiwana</h1>
+      <p class="overlay-sub">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p class="overlay-date">Sabtu, 04 April 2026</p>
+      <div class="overlay-actions">
+        <button id="openBtn" class="btn-primary">Buka Undangan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main site content -->
+  <header class="cover" id="home">
+    <!-- Responsive cover image: we'll use an <img> with object-fit for srcset support; replace assets/cover-*.jpg with your images -->
+    <picture class="cover-media">
+      <!-- Provide multiple sizes for best mobile/desktop results -->
+      <source srcset="assets/cover-large.jpg 1200w, assets/cover-medium.jpg 800w, assets/cover-small.jpg 480w" sizes="(max-width:800px) 100vw, 1200px">
+      <!-- if the image fails to load (no asset provided), hide the img element to reveal the CSS decorative background -->
+      <!-- data-focus-y sets vertical focal point in percent (0 = top, 50 = center, 100 = bottom) -->
+      <img src="assets/cover-large.jpg" alt="Cover" class="cover-img" data-focus-y="35" onerror="this.style.display='none'">
+    </picture>
+    <div class="cover-inner">
+      <h2 class="cover-title">The Wedding Of</h2>
+      <h1 class="cover-names">Sri &amp; Daiwana</h1>
+      <p class="cover-date">Sabtu, 04 April 2026</p>
+      <div class="countdown" id="countdown">
+        <div><span id="days">--</span><small>Hari</small></div>
+        <div><span id="hours">--</span><small>Jam</small></div>
+        <div><span id="minutes">--</span><small>Menit</small></div>
+        <div><span id="seconds">--</span><small>Detik</small></div>
+      </div>
+      <a href="#acara" class="btn-ghost">Lihat Acara</a>
+    </div>
+    <div class="scroll-hint">&#x2193; Geser</div>
+  </header>
+
+  <!-- Background audio (optional). Place an MP3 at assets/music.mp3 to enable. Hidden controls, will play when visitor opens the invitation. -->
+  <audio id="bgAudio" src="assets/music.mp3" preload="auto"></audio>
+
+  <!-- Visible audio toggle (will show when JS initializes) -->
+  <button id="audioToggle" class="audio-toggle" aria-pressed="false" title="Putar / Hentikan musik" aria-label="Putar atau hentikan musik latar">🔊</button>
+
+  <!-- noscript fallback: hide overlay so content is still accessible when JavaScript is disabled -->
+  <noscript>
+    <style>
+      #overlay{display:none !important}
+      .audio-toggle{display:none !important}
+    </style>
+    <div style="background:#f7f7f7;color:#222;padding:1rem;text-align:center">JavaScript dinonaktifkan — untuk pengalaman terbaik klik <a href="#acara">Lihat Acara</a> atau aktifkan JavaScript.</div>
+  </noscript>
+
+  <main>
+    <!-- Pembuka Religius -->
+    <section class="section panel" id="pembuka">
+      <div class="container">
+        <h3 class="section-title">Pembuka</h3>
+        <p class="lead">Maha Suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah, perkenankanlah kami untuk menikahkan putra-putri kami:</p>
+      </div>
+    </section>
+
+    <!-- Mempelai -->
+    <section class="section mempelai">
+    <!-- Background image inserted as an <img> for reliable rendering -->
+    <img src="assets/images/mempelai-bg.jpg" class="mempelai-bg-img" alt="Foto Mempelai" aria-hidden="true">
+    <div class="container grid">
+        <div class="person fade-item">
+          <h4>Pengantin Pria</h4>
+          <p class="name">Muhammad Daiwana</p>
+        </div>
+        <div class="person fade-item">
+          <h4>Pengantin Wanita</h4>
+          <p class="name">Sri Sukmawati</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acara Hajat (Utama) -->
+    <section class="section panel" id="acara">
+      <div class="container">
+        <h3 class="section-title">Acara Hajat — Utama</h3>
+        <p class="greeting">Assalamu’alaikum Wr. Wb.</p>
+        <div class="event fade-item">
+          <p>Dengan ini kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara hajat kami yang akan diselenggarakan pada:</p>
+          <ul class="event-details">
+            <li><strong>Tanggal:</strong> Sabtu, 04 April 2026</li>
+            <li><strong>Waktu:</strong> Pukul 09.00 WIB s/d selesai</li>
+            <li><strong>Tempat:</strong> Kp. Panuusan RT 01 RW 02, Desa Malakasari, Kecamatan Baleendah (Kediaman Mempelai Pria)</li>
+          </ul>
+          <p>Bertempat di alamat tersebut di atas. Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+          <p>Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami ucapkan terima kasih.</p>
+          <p class="closing">Wassalamu’alaikum Wr. Wb.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lokasi -->
+    <section class="section" id="lokasi" data-address="Kp. Panuusan RT 01 RW 02, Desa Malakasari, Kecamatan Baleendah" data-lat="-7.007899799999992" data-lng="107.60001073610688" data-embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.0014676094537!2d107.60001073610688!3d-7.007899799999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e900717b2553%3A0xe5d55a1a8592c134!2sKontrakan%20pa%20dadan!5e0!3m2!1sid!2sid!4v1773756976913!5m2!1sid!2sid">
+      <div class="container">
+        <h3 class="section-title">Lokasi</h3>
+        <p>Kp. Panuusan RT 01 RW 02, Desa Malakasari, Kecamatan Baleendah</p>
+        <div class="map-actions">
+          <!-- Button opens Google Maps (short link provided by user) -->
+          <a id="mapsLink" class="btn-primary" target="_blank" rel="noopener" href="https://maps.app.goo.gl/nbeEHpCpmeVgr4Mw7">Lihat di Google Maps</a>
+
+          <!-- Embedded map (pinned if coordinates provided). The iframe src will be set by script.js.
+               To force a pinned map, add data-lat and data-lng attributes to the #lokasi section (e.g. data-lat="-6.9" data-lng="107.6"). -->
+          <div class="map-embed">
+            <iframe id="mapFrame" class="map" loading="lazy" src="" title="Peta lokasi"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Akad Nikah (Sekunder) -->
+    <section class="section panel secondary" id="akad">
+      <div class="container">
+        <h3 class="section-title">Akad Nikah</h3>
+        <div class="event fade-item">
+          <ul class="event-details">
+            <li><strong>Tanggal:</strong> Minggu, 12 April 2026</li>
+            <li><strong>Waktu:</strong> Pukul 09.00 WIB s/d selesai</li>
+            <!-- Show the same textual address as the groom's location, but provide a different maps link/embed for the bride as requested -->
+            <li><strong>Tempat:</strong> Kp. Cigoong RT 01 RW 05, Desa Mekarsari, Kecamatan Cimaung (Kediaman Mempelai Wanita)</li>
+          </ul>
+        </div>
+        <!-- Map & link specific to the Akad (bride's map link/embed provided by user) -->
+        <div class="map-actions mt-2">
+          <a id="mapsLinkAkad" class="btn-primary" target="_blank" rel="noopener" href="https://maps.app.goo.gl/dK568HUVxUq46iPu6">Lihat di Google Maps (Akad)</a>
+          <div class="map-embed mt-2">
+            <iframe id="mapFrameAkad" class="map" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d397.58320514278387!2d107.5700297155275!3d-7.116943384325708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1773769109072!5m2!1sid!2sid" title="Peta lokasi Akad" width="100%" height="280" style="border:0;" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keluarga & Turut Mengundang -->
+    <section class="section panel" id="keluarga">
+      <div class="container">
+        <h3 class="section-title">Kami Yang berbahagia.</h3>
+
+        <!-- Family blocks moved directly under the main title as requested -->
+        <div class="family-grid">
+          <div class="family-block family-left fade-item">
+            <p class="family-name">Keluarga Besar Bpk. Dedi Hendriana &amp; Ibu Rita Risanti</p>
+          </div>
+          <div class="family-block family-right fade-item">
+            <p class="family-name">Keluarga Besar Bpk. Dadan Mulyana &amp; Ibu Ambar Wati</p>
+          </div>
+          <div class="family-block family-center fade-item">
+            <p class="signature">Sri &amp; Daiwana</p>
+          </div>
+        </div>
+
+        <!-- Subheading for the guest list placed under the family blocks -->
+        <h4 class="mt-2 subheading">Turut Mengundang :</h4>
+
+        <!-- Guests list moved below the family blocks -->
+        <ul class="guests fade-item">
+          <li>Keluarga Besar Abah Atam (Alm) &amp; Ibu Eroh (Almh)</li>
+          <li>Keluarga Besar Bpk. Okib (Alm) &amp; Ibu Diah (Almh)</li>
+          <li>Bpk. Dedi Suprianto</li>
+          <li>Ibu Ai Rohaeti</li>
+          <li>Ibu Eros Rosito</li>
+          <li>Bpk. Tata Rusmana</li>
+          <li>Ibu Ida Rosida</li>
+          <li>Bpk. Uze (Adeta Furniture)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Penutup -->
+    <section class="section panel" id="penutup">
+      <div class="container">
+        <h3 class="section-title">Penutup</h3>
+        <p>Mohon maaf apabila ada kesalahan dalam penulisan nama &amp; gelar.</p>
+        <p class="closing">Wassalamu’alaikum Wr. Wb.</p>
+        <p class="thanks">Terima kasih atas perhatian dan doa restunya.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container small">&copy; 2026 Sri &amp; Daiwana — Undangan Fisik (Digital Preview)</div>
+    <!-- Ornamen dekoratif untuk footer (diam di pojok kanan-bawah footer) -->
+    <img src="assets/images/ornament-br.png" class="footer-ornament br" alt="" aria-hidden="true">
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Kembali ke atas">⬆</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
