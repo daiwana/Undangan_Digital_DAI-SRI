@@ -1,0 +1,368 @@
+/*
+  style.css
+  Elegant, modern, responsive styles for the wedding invitation
+  - Primary color: denim (#2c3e50)
+  - Accent: gold
+  - Fonts: Playfair Display (titles), Poppins (body)
+*/
+
+:root{
+  --denim:#2c3e50;
+  --white:#ffffff;
+  --gold:#c59d5f;
+  --muted:#6b7a86;
+  --max-width:1100px;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Poppins',system-ui,Arial,"Segoe UI",sans-serif;
+  color:var(--denim);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  scroll-behavior:smooth; /* smooth scroll for anchor links */
+}
+
+.container{max-width:var(--max-width);margin:0 auto;padding:2rem}
+.small{font-size:.9rem;color:var(--muted)}
+
+/* Buttons */
+.btn-primary{background:var(--denim);color:var(--white);border:none;padding:.8rem 1.2rem;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block;font-weight:600}
+.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.18);color:var(--white);padding:.6rem 1rem;border-radius:6px;text-decoration:none}
+
+/* Overlay splash */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  color:var(--white);
+  text-align:center;
+  padding:2rem;
+  /* Background image for the splash (user-provided). Keep a fallback color. */
+  background-color:rgba(44,62,80,0.85);
+  background-image: url('assets/background_buka_undangan.jpg');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  overflow:auto;
+}
+.overlay-content{position:relative;z-index:2;max-width:720px;animation:overlay-in .9s cubic-bezier(.2,.9,.2,1);padding:2.4rem;backdrop-filter: blur(6px);border-radius:16px}
+
+/* gradient layer above the image to ensure text remains readable */
+.overlay::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(135deg, rgba(44,62,80,0.62), rgba(32,44,56,0.62));
+  pointer-events:none;
+}
+.overlay-title{font-family:'Playfair Display',serif;margin:0;font-size:1.1rem;opacity:.95;letter-spacing:1px}
+.overlay-names{font-family:'Playfair Display',serif;font-size:3.2rem;margin:.3rem 0;line-height:1}
+.overlay-sub{font-family:'Poppins',sans-serif;margin:.6rem 0 .2rem;color:rgba(255,255,255,.9);font-size:1.05rem}
+.overlay-date{opacity:.95;margin-bottom:1rem;font-weight:600}
+
+.overlay-actions{display:flex;gap:1rem;justify-content:center;margin-top:1rem}
+
+@keyframes overlay-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ornament corners */
+.ornament{position:absolute;z-index:9996;opacity:.95}
+.ornament-tl{left:-10px;top:-10px;transform:translate(-6%,-6%) scale(.95)}
+.ornament-tr{right:-6px;top:-6px;transform:translate(6%,-6%) scale(.95)}
+.ornament-bl{left:-6px;bottom:-6px;transform:translate(-6%,6%) scale(.95)}
+.ornament-br{right:-6px;bottom:-6px;transform:translate(6%,6%) scale(.95)}
+
+/* overlay button styles */
+.overlay .btn-primary{padding:1rem 1.6rem;font-size:1.05rem;border-radius:12px}
+.overlay .btn-ghost{padding:.8rem 1.2rem;border-radius:12px}
+
+/* scale/hover micro-animations */
+.overlay .btn-primary{transition:transform .18s ease,box-shadow .18s ease}
+.overlay .btn-primary:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 22px 40px rgba(0,0,0,0.2)}
+
+/* closing animation */
+.overlay.closing{transform:scale(.98);opacity:0}
+
+/* when opened, make header elements gently animate (optional) */
+body.opened .cover-inner{transform:translateY(-6px);transition:transform .6s ease}
+.floral{position:absolute;width:180px;height:180px;background-image:radial-gradient(circle at 20% 20%, rgba(197,157,95,.12), transparent 30%);filter:blur(6px);opacity:.6}
+.floral.top-left{left:0;top:0;transform:translate(-20%,-20%) rotate(-10deg)}
+.floral.bottom-right{right:0;bottom:0;transform:translate(20%,20%) rotate(20deg)}
+
+/* Cover */
+.cover{min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;background-color:var(--denim);color:var(--white);overflow:hidden}
+/* Decorative denim + gold gradient for wedding mood; ornaments are placed via pseudo-elements */
+.cover::before,
+.cover::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;mix-blend-mode:normal;opacity:.96;
+}
+.cover::before{
+  /* top overlay + soft radial + linear gradient to give depth; top linear is a subtle black veil
+     to increase contrast for hero text while keeping the photo visible */
+  /* stronger veil for better contrast over busy photos */
+  /* stronger dark veil to maximize contrast for hero text */
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(0,0,0,0.82)),
+                    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.02), transparent 12%),
+                    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.06), transparent 20%),
+                    linear-gradient(180deg, rgba(44,62,80,0.0), rgba(36,52,70,0.0));
+}
+
+/* subtle vignette to increase legibility over hero image */
+.cover::before{box-shadow:inset 0 160px 200px rgba(0,0,0,0.6), inset 0 -120px 220px rgba(0,0,0,0.5)}
+.cover::after{
+  /* subtle ornamental gold corner flourishes using inline SVG data-URI */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='380' height='380' viewBox='0 0 380 380'><path d='M20,300 C80,220 160,200 230,150' stroke='%23c59d5f' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round' opacity='0.95'/><circle cx='30' cy='330' r='6' fill='%23c59d5f' opacity='0.85'/></svg>" ) ,
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='380' height='380' viewBox='0 0 380 380'><path d='M360,80 C300,160 220,180 150,230' stroke='%23c59d5f' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round' opacity='0.95'/><circle cx='350' cy='50' r='6' fill='%23c59d5f' opacity='0.85'/></svg>");
+  background-repeat:no-repeat,no-repeat;
+  background-position: left top, right bottom;
+  background-size: 28% 28%, 28% 28%;
+  mix-blend-mode:screen;
+}
+/* ensure cover-media (picture) sits above decorative background but beneath content; image will hide if not present */
+.cover-media{position:absolute;inset:0;overflow:hidden;z-index:0}
+/* Single, authoritative rule for the cover image used by parallax/Ken Burns */
+.cover-img{
+  width:100%;
+  height:120%; /* slightly taller for gentle parallax */
+  object-fit:cover;
+  object-position:center 40%;
+  display:block;
+  /* further darken the image to ensure the veil produces a strong contrast */
+  filter:brightness(.6) contrast(1);
+  transition:transform .2s linear;
+}
+.cover-inner {position:relative;z-index:1;text-align:center;padding:4rem 1rem}
+/* ensure cover content sits above the cover media only */
+
+/* Fallback/background image for the cover in case the <img> doesn't render in some browsers
+  This ensures the header won't appear as a flat gray band if the picture element fails to load. */
+.cover{background-image: url('assets/cover-large.jpg');background-size:cover;background-position:center 40%;}
+
+/* audio toggle button (hidden by default; shown by JS when audio exists) */
+.audio-toggle{
+  position:fixed;top:1rem;right:1rem;z-index:9998;display:none;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:12px;border:0;background:linear-gradient(180deg,var(--gold),#b58b48);color:var(--denim);cursor:pointer;font-size:18px;font-weight:700;
+}
+.audio-toggle:hover{filter:brightness(.98);transform:translateY(-2px)}
+.cover-title{font-family:'Playfair Display',serif;margin:0;font-size:1.15rem;opacity:.95}
+.cover-names{font-family:'Playfair Display',serif;font-size:3.8rem;margin:.3rem 0;letter-spacing:1px}
+.cover-date{opacity:.95;font-weight:600}
+
+/* stronger text shadow for hero titles to enhance legibility */
+.cover-title, .cover-names{
+  text-shadow: 0 14px 40px rgba(0,0,0,0.75);
+}
+
+.countdown{display:flex;gap:1rem;justify-content:center;margin:1.2rem 0}
+.countdown div{background:rgba(255,255,255,.06);padding:.6rem 1rem;border-radius:8px;min-width:72px}
+.countdown span{display:block;font-weight:700;font-size:1.25rem}
+.countdown small{opacity:.85;font-size:.8rem}
+
+/* Sections */
+.section{padding:3rem 1rem}
+.panel{background:linear-gradient(180deg,#fff 0%,#fbfbfb 100%)}
+.secondary{background:transparent}
+.section-title{font-family:'Playfair Display',serif;font-size:1.4rem;margin:0 0 1rem;color:var(--denim)}
+.lead{font-size:1.05rem;color:var(--muted)}
+
+.mempelai .grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.person{text-align:center;padding:1.25rem;border-radius:10px}
+.person .name{font-family:'Playfair Display',serif;font-size:1.35rem;margin:.5rem 0}
+
+/* Use a couple portrait photo as a background for the mempelai section.
+   Save the provided photo to assets/images/mempelai-bg.jpg to enable this.
+   The overlay ensures text remains readable across images. */
+.mempelai{
+  position:relative;
+  background-color:var(--bg); /* fallback if image missing */
+  color:var(--denim);
+  overflow:hidden;
+}
+/* Use an actual <img> element for the mempelai background to avoid pseudo-element issues */
+.mempelai{position:relative;overflow:hidden}
+.mempelai .mempelai-bg-img{
+  position:absolute;inset:0;width:100%;height:130%;object-fit:cover;object-position:center 40%;z-index:0;filter:brightness(.6) contrast(.98);pointer-events:none;
+}
+.mempelai .container{position:relative;z-index:2}
+.mempelai::after{
+  /* subtle dark overlay to keep text legible */
+  content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.28));pointer-events:none}
+
+/* Make the mempelai names and headings white for contrast over the background photo */
+.mempelai .person, .mempelai .person h4, .mempelai .person .name{
+  color: #ffffff;
+}
+
+@media (max-width:800px){
+  .mempelai::before{background-position:center 40%}
+}
+
+.event-details{list-style:none;padding-left:0}
+.event-details li{padding:.25rem 0}
+
+.map{width:100%;height:280px;border-radius:8px;border:0;margin-top:1rem}
+
+.guests{list-style:none;padding-left:0}
+.guests li{padding:.35rem 0}
+
+.signature{font-family:'Playfair Display',serif;font-size:1.1rem;margin-top:1rem}
+.thanks{font-weight:600;color:var(--denim)}
+
+.site-footer{padding:1.5rem 0;text-align:center;background:transparent}
+
+/* Styling for the family area: two columns with centered couple name underneath */
+#keluarga .section-title{text-align:center}
+.family-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start;margin-top:1.4rem}
+.family-block{padding:1rem}
+.family-left{text-align:left}
+.family-right{text-align:right}
+.family-center{grid-column:1 / -1;text-align:center;margin-top:.8rem}
+.family-name{font-weight:600}
+
+@media (max-width:800px){
+  .family-grid{grid-template-columns:1fr;gap:.8rem}
+  .family-right{text-align:left}
+  .family-center{margin-top:0.6rem}
+}
+
+/* Subheading style for Turut Mengundang directly under the main title */
+.subheading{
+  text-align:center;
+  color:#111; /* black */
+  margin-top:.6rem;
+  margin-bottom:.6rem;
+  font-weight:600;
+  font-family: 'Playfair Display', serif;
+  font-size:1.35rem; /* slightly larger to match section title */
+}
+
+/* Emphasize the couple name in the keluarga section */
+#keluarga .family-center .signature{
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  line-height:1.02;
+  letter-spacing:1px;
+  font-weight:700;
+  color:var(--denim);
+  text-align:center;
+  margin:0.6rem 0 0.2rem;
+  text-shadow: 0 8px 26px rgba(44,62,80,0.08);
+}
+
+@media (max-width:800px){
+  #keluarga .family-center .signature{font-size:1.8rem}
+}
+
+/* Fade-in animation */
+.fade-item{opacity:0;transform:translateY(12px);transition:all .7s cubic-bezier(.2,.9,.2,1)}
+.fade-item.in-view{opacity:1;transform:translateY(0)}
+
+/* Responsive adjustments */
+@media (max-width:800px){
+  .cover-names{font-size:2rem}
+  .mempelai .grid{grid-template-columns:1fr}
+  .countdown{flex-wrap:wrap}
+  .container{padding:1rem}
+}
+
+/* Additional mobile layout tweaks for small screens */
+@media (max-width:420px){
+  .overlay-names{font-size:1.6rem}
+  .overlay-content{padding:1rem}
+  .cover-inner{padding:2rem 1rem}
+  .cover-names{font-size:1.6rem}
+  .countdown{gap:.4rem}
+  .countdown div{min-width:56px;padding:.4rem .6rem}
+  .btn-primary{padding:.6rem .9rem}
+}
+
+/* If the cover image is not provided, use an elegant gradient fallback color */
+.cover[style*="url('assets/cover.jpg')"]:empty{background:linear-gradient(180deg,var(--denim),#3a4f62)}
+
+/* Small utilities */
+.mt-2{margin-top:4rem}
+.greeting{font-style:italic;color:var(--muted)}
+
+/* Center the religious salutations/greetings in acara and penutup */
+.greeting, .closing{text-align:center;margin:0.6rem 0;font-weight:600;color:var(--denim)}
+.closing{font-family:'Playfair Display',serif}
+
+/* Accessibility focus states */
+a:focus,button:focus{outline:3px solid rgba(197,157,95,.25);outline-offset:3px}
+
+/* --- Enhancements: visual polish, buttons, parallax helpers, back-to-top --- */
+:root{
+  --muted-2:#8b98a2;
+  --bg:#fbfbfb;
+  --glass: rgba(255,255,255,0.6);
+}
+
+body{background:var(--bg)}
+
+/* decorative separator under section titles */
+.section::before{content:'';display:block;width:72px;height:4px;margin:0 auto 1.2rem;border-radius:4px;background:linear-gradient(90deg,var(--gold),rgba(197,157,95,0.35));opacity:.95}
+
+/* Buttons: lift and hover */
+.btn-primary{box-shadow:0 6px 18px rgba(44,62,80,0.12);transition:transform .25s ease,box-shadow .25s ease}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 18px 30px rgba(44,62,80,0.16)}
+.btn-ghost{transition:background .18s ease;border-radius:10px}
+.btn-ghost:hover{background:rgba(255,255,255,0.04)}
+
+/* Cover image tweaks: larger than container for gentle parallax */
+.cover{min-height:82vh}
+.cover-img{height:120%;transition:transform .2s linear}
+.cover-inner h1, .cover-inner h2{text-shadow:0 6px 22px rgba(0,0,0,0.28)}
+
+/* subtle scroll hint */
+.scroll-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.95);font-size:20px}
+
+/* back to top */
+.back-to-top{position:fixed;right:18px;bottom:18px;background:var(--denim);color:#fff;border:0;padding:.6rem .8rem;border-radius:999px;box-shadow:0 8px 20px rgba(44,62,80,.18);cursor:pointer;display:none;z-index:10010}
+.back-to-top.show{display:block}
+
+/* small cards and panels look elevated */
+.panel{border-radius:12px;padding:1.6rem;box-shadow:0 10px 30px rgba(44,62,80,0.04)}
+
+/* reduce map iframe glare on hover */
+.map{transition:transform .18s ease,box-shadow .18s ease}
+.map:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.08)}
+
+/* stagger-able fade items: transition-delay will be set by JS */
+.fade-item{transition-delay:0ms}
+
+/* Footer-scoped ornament (floral)
+   Place the provided image at assets/images/ornament-br.png
+   It's non-interactive and positioned absolute within the footer so it only appears there. */
+.site-footer{position:relative;overflow:visible}
+.footer-ornament{
+  position:absolute;
+  right:0;
+  bottom:0;
+  z-index:2; /* above footer background but below overlays */
+  pointer-events:none;
+  opacity:.92;
+  width:28vw;
+  max-width:420px;
+  height:auto;
+  transform:none; /* static */
+  mix-blend-mode:normal;
+}
+.footer-ornament.br{right:0;bottom:0}
+
+@media (max-width:800px){
+  .footer-ornament{width:40vw;opacity:.85}
+}
+
+@media (max-width:420px){
+  .footer-ornament{width:56vw;opacity:.75}
+}
+
