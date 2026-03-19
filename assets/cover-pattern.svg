@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simple decorative SVG pattern (lightweight) - use as cover background -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0.06"/>
+    </linearGradient>
+    <filter id="grain" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" result="t"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" in2="t" mode="overlay" opacity="0.02"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <!-- subtle ornamental circles -->
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.08" stroke-width="2">
+    <circle cx="200" cy="150" r="120" />
+    <circle cx="400" cy="250" r="80" />
+    <circle cx="900" cy="120" r="160" />
+    <circle cx="980" cy="620" r="220" />
+  </g>
+  <g filter="url(#grain)"></g>
+</svg>
