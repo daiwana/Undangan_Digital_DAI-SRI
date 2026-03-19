@@ -62,6 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
 							// set object-position if data-offset provided (e.g. data-offset="62%")
 							const offset = i.dataset.offset ? i.dataset.offset.trim() : null;
 							if (offset) {
+
+					// Preload shared cover photo for section backgrounds and then add class to body
+					(function preloadSectionBG(){
+						const url = 'assets/cover-photo.jpg';
+						const img = new Image();
+						img.onload = () => {
+							document.body.classList.add('bg-sections-loaded');
+						};
+						img.onerror = () => {
+							console.debug('Section background failed to load:', url);
+						};
+						img.src = url;
+					})();
 								i.style.objectPosition = `50% ${offset}`;
 							} else {
 								// default slightly lower focal point so head sits a bit below center

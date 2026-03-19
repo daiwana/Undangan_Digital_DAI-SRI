@@ -11,10 +11,11 @@
 	--gold: #d4af37;
 	--muted: #7f8c8d;
 	--max-width: 900px;
+	--section-overlay: 0.55; /* opacity for white overlay on section backgrounds (0..1) */
 }
 
 *{box-sizing:border-box}
-html,body{height:100%;overflow-x:hidden}
+html,body{height:100%}
 body{
 	margin:0;
 	font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
@@ -23,16 +24,14 @@ body{
 	-webkit-font-smoothing:antialiased;
 	-moz-osx-font-smoothing:grayscale;
 	line-height:1.5;
-	/* respect safe-area insets on iOS */
-	padding-bottom:env(safe-area-inset-bottom,0);
 }
 
 a{color:inherit}
 img{max-width:100%;height:auto}
 
 /* GLOBAL CONTAINERS */
-.container{max-width:var(--max-width);margin:0 auto;padding:1rem}
-.section{padding:2rem 0}
+.container{max-width:var(--max-width);margin:0 auto;padding:1.25rem}
+.section{padding:3.25rem 0}
 
 /* Acara Hajat card styles */
 .section-title{font-family:'Playfair Display',serif;margin-bottom:1rem;font-size:1.25rem;color:var(--denim)}
@@ -55,7 +54,8 @@ img{max-width:100%;height:auto}
 .countdown{font-size:.9rem;color:var(--denim);background:rgba(255,255,255,.85);backdrop-filter:blur(6px);padding:.4rem .6rem;border-radius:999px;border:1px solid rgba(0,0,0,.05)}
 
 /* COVER */
-.cover{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;z-index:10;transition:opacity .9s ease,visibility .3s ease;height:100vh;padding:calc(1rem + env(safe-area-inset-top,0)) calc(1rem, 2.5vw) calc(1rem + env(safe-area-inset-bottom,0));}
+.cover{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;z-index:10;transition:opacity .9s ease,visibility .3s ease}
+.cover{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;z-index:10;transition:opacity .9s ease,visibility .3s ease;height:100vh}
 .cover-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(212,175,55,0.06));filter:blur(8px) contrast(.95);mix-blend-mode:normal;background-size:cover;background-position:center}
 .cover-content{position:relative;z-index:11;max-width:720px;margin:auto;opacity:0;transform:translateY(10px);transition:opacity .9s ease,var(--transform,transform) .9s ease;padding:1rem}
 .cover.visible .cover-content{opacity:1;transform:translateY(0)}
@@ -74,18 +74,18 @@ img{max-width:100%;height:auto}
 .no-scroll{overflow:hidden;height:100vh}
 
 /* MAIN / SECTIONS */
-.main{padding-top:0;padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
-.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;position:relative;background-color:rgba(44,62,80,0.04);background-size:cover;background-position:center 40%}
+.main{padding-top:0}
+.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;background-color:rgba(44,62,80,0.04);background-size:cover;background-position:center 40%}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.06));pointer-events:none;border-radius:0;z-index:1}
 /* hero background layer (uses CSS var --hero-bg set from JS) */
 .hero::after{content:"";position:absolute;inset:0;background-image:var(--hero-bg);background-size:cover;background-position:center 36%;opacity:0;transition:opacity .9s ease;z-index:0;filter:brightness(.98)}
 .hero.bg-loaded::after{opacity:1}
-.hero-inner{text-align:center;padding:1.25rem .75rem;position:relative;z-index:2}
+.hero-inner{text-align:center;padding:2rem 1rem;position:relative;z-index:2}
 .hero-names{font-family:'Playfair Display',serif;font-size:1.6rem;margin:.2rem 0;color:var(--denim)}
 .hero-date{color:var(--muted);margin-top:.4rem}
 
 /* Connect hero photo to next section (pembuka) by overlapping a white card */
-#pembuka{position:relative;margin-top:-2.2rem;z-index:3}
+#pembuka{position:relative;margin-top:-3rem;z-index:3}
 #pembuka .container{background:transparent;padding:0}
 #pembuka .pembuka-inner{max-width:720px;margin:0 auto;border-radius:12px;padding:1.25rem;background:rgba(255,255,255,0.92);box-shadow:0 12px 30px rgba(44,62,80,.06)}
 
@@ -113,14 +113,13 @@ img{max-width:100%;height:auto}
 .name{font-weight:600;margin:.15rem 0}
 
 /* Cards, icons */
-.grid-icons{display:grid;grid-template-columns:1fr;gap:1rem}
-.icon-card{min-width:0}
+.grid-icons{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .icon-card{background:#fff;border-radius:10px;padding:1rem;display:flex;gap:.8rem;align-items:center;box-shadow:0 6px 18px rgba(44,62,80,.04)}
 .icon{font-size:1.6rem}
 
 .btn{display:inline-block;background:transparent;border:1px solid rgba(44,62,80,.08);padding:.5rem .8rem;border-radius:8px;color:var(--denim);text-decoration:none}
-.map-embed{margin-top:1rem;border-radius:8px;overflow:hidden;height:calc(min(220px, 30vh))}
-.map-embed.small{height:calc(min(160px, 24vh))}
+.map-embed{margin-top:1rem;border-radius:8px;overflow:hidden;height:200px}
+.map-embed.small{height:140px}
 .map-embed iframe{width:100%;height:100%;border:0}
 
 .family-list{padding-left:1.1rem}
@@ -173,7 +172,7 @@ img{max-width:100%;height:auto}
 .qris-wrap img{width:220px;max-width:60%;height:auto;border-radius:12px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.06)}
 
 /* Copy notification */
-.copy-notif{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:var(--denim);color:var(--white);padding:.6rem .9rem;border-radius:999px;box-shadow:0 8px 24px rgba(44,62,80,.12);opacity:0;pointer-events:none;transition:opacity .16s ease;z-index:80}
+.copy-notif{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:var(--denim);color:var(--white);padding:.6rem .9rem;border-radius:999px;box-shadow:0 8px 24px rgba(44,62,80,.12);opacity:0;pointer-events:none;transition:opacity .16s ease}
 .copy-notif.show{opacity:1}
 
 /* QR modal fullscreen */
@@ -204,6 +203,52 @@ img{max-width:100%;height:auto}
 .audio-toggle:focus{outline:3px solid rgba(212,175,55,.18)}
 .audio-toggle.active{background:linear-gradient(135deg,var(--gold),#d4af37);color:var(--white);border-color:rgba(0,0,0,.06)}
 
+/* Use cover-photo.jpg as a muted background for sections starting at #mempelai
+   Image is applied only after JS preloads it (body.bg-sections-loaded) to avoid flicker.
+   A semi-opaque white overlay keeps the photo subtle and ensures text legibility. */
+body.bg-sections-loaded #mempelai,
+body.bg-sections-loaded #acara,
+body.bg-sections-loaded #akad,
+body.bg-sections-loaded #hiburan,
+body.bg-sections-loaded #keluarga,
+body.bg-sections-loaded .amplop,
+body.bg-sections-loaded #penutup{
+	background-image: url('assets/cover-photo.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+body.bg-sections-loaded #mempelai::before,
+body.bg-sections-loaded #acara::before,
+body.bg-sections-loaded #akad::before,
+body.bg-sections-loaded #hiburan::before,
+body.bg-sections-loaded #keluarga::before,
+body.bg-sections-loaded .amplop::before,
+body.bg-sections-loaded #penutup::before{
+	content: "";
+	position: absolute;
+	inset: 0;
+	/* use CSS variable for quick tuning */
+	background: rgba(255,255,255,var(--section-overlay)); /* white overlay to mute image */
+	z-index: 0;
+}
+
+/* Ensure containers and cards sit above the overlay */
+body.bg-sections-loaded #mempelai > .container,
+body.bg-sections-loaded #acara > .container,
+body.bg-sections-loaded #akad > .container,
+body.bg-sections-loaded #hiburan > .container,
+body.bg-sections-loaded #keluarga > .container,
+body.bg-sections-loaded .amplop > .container,
+body.bg-sections-loaded #penutup > .container{
+	position: relative;
+	z-index: 1;
+}
+
+/* Slight tint fallback if image fails to load; keeps subtle warm paper look */
+#mempelai, #acara, #akad, #hiburan, #keluarga, .amplop, #penutup{background-color:rgba(255,255,255,0.98)}
 .audio-toggle .icon{display:inline-block;width:18px;height:18px}
 .audio-toggle .icon-pause{display:none}
 .audio-toggle.active .icon-play{display:none}
@@ -231,8 +276,8 @@ img{max-width:100%;height:auto}
 	/* much narrower, softer white band */
 	background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 46%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 54%, rgba(255,255,255,0) 100%);
 	transform:translateX(-100%);
-	opacity:0.45;
-	filter:blur(4px);
+	opacity:0.85;
+	filter:blur(6px);
 }
 
 @keyframes gold-shine{
@@ -261,17 +306,6 @@ img{max-width:100%;height:auto}
 	.container{padding:2rem}
 	.hero{min-height:70vh}
 	.hero-names{font-size:3rem}
-}
-
-@media(min-width:640px){
-	.grid-icons{grid-template-columns:1fr 1fr}
-}
-
-@media(max-width:360px){
-    .section{padding:1rem 0}
-    .amplop{padding:1.5rem 0}
-    .closing-card{padding:1rem}
-    .cover .couple{font-size:clamp(1.2rem,6vw,2.2rem)}
 }
 
 /* small polish */
